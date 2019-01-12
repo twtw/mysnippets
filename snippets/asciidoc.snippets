@@ -1,0 +1,41 @@
+# according to
+# http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+
+snippet tips
+	${1:press F5}
+	'''
+snippet dt
+	= ${1:Document Title}
+
+snippet l1
+	== ${1:Level 1 Section}'
+
+snippet l2
+	=== ${1:Level 1 Section}'
+
+snippet ul
+	* ${1}
+	* ${2}
+	* ${3}
+
+snippet code
+	[[app-listing]]
+	[source,${1:lang}]
+	${2:filename}
+	----
+	${3:snippets}
+	---
+
+# sb = sidebar
+snippet sb
+	.${1:title}
+	****
+	${2:text}
+	****
+
+# a = url link
+snippet a
+	${1:paste url}[${2:paste title}]
+
+# another
+

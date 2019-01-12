@@ -1,0 +1,133 @@
+# https://tonytonyjan.net/2012/05/25/get-start-with-chrome-extension/
+# crome extensions manifest.json
+snippet man
+	{
+	  "manifest_version" : ${1},
+	  "name" : ${2},
+	  "description" : "${3}",
+	  "version" : "${4}",
+	  "browser_action" : {
+	    "default_title" : "${5}",
+	    "default_icon" : "${6:icon.png}",
+	    "default_popup" : "${7:pupup.html}"
+	  },
+	  "icons" : {
+	    "16" : "icon16.png",
+	    "48" : "icon48.png",
+	    "128" : "icon128.png"
+	  }
+	}
+# http://sandbox.iii.com/docs/Content/zAppendix/jsonQuery.htm
+# http://sandbox.iii.com/docs/Content/zAppendix/keywordSearchIndexes.htm
+# http://csdirect.iii.com/sierrahelp/Default.php#sgil/sgil_lists.html
+# http://csdirect.iii.com/sierrahelp/Default.php#sgil/sgil_search_indexes.html
+# 700 |aJames, Henry |tPortrait of a lady
+# http://csdirect.iii.com/sierrahelp/Default.php#sgil/sgil_search_indexes_word.html
+#Segment Name	Index Tag Synonyms
+#Title	t, ti, title
+#Author	a, au, author
+#Subject	d, d, s, su, subject
+#Note	n, no, note
+#Mediaplus	v
+# Record Numbers http://csdirect.iii.com/sierrahelp/Default.php#sril/sril_records_numbers.html
+#More About Phrase Indexes http://csdirect.iii.com/sierrahelp/Default.php#sgil/sgil_search_indexes_heading.html
+# http://csdirect.iii.com/sierrahelp/Default.php#sgil/sgil_lists_json.html
+# field - a JSON object representing a non-MARC variable-length field, in which case there is a single string/value tag property, or a MARC field, in which case there are marcTag, ind1, ind2, and subfields properties, all of which are strings. These values are documented in the reference topics that describe the variable-length fields found in Innovative record types.
+# http://csdirect.iii.com/sierrahelp/Content/sril/sril_records_varfld_types_item.html
+# item 可能的 tag
+# http://csdirect.iii.com/sierrahelp/Default.php#sgil/sgil_lists_boolean_searching.html
+# Using Relational Operators
+# Item 可用 x 查！
+# A simple query with a single, simple expression
+# A simple query for Bibliographic title equal to 'moby dick'
+snippet zjq1
+	// A simple query for Bibliographic title equal to 'moby dick'
+	{
+		"target": {
+			"record": {"type": "bib"},
+			"field": {"tag": "t"}
+		},
+		"expr": {
+			"op": "equals",
+			"operands": ["moby dick"]
+		}
+	}
+snippet jq1
+	// A simple query for Bibliographic title equal to 'moby dick'
+	{
+		"target": {
+			"record": {"type": "${1:bib}"},
+			"field": {"tag": "${2:t}"}
+		},
+		"expr": {
+			"op": "${3:equals}",
+			"operands": ["${4:moby dick}"]
+		}
+	}
+# A compound query consisting of two simple queries
+# A compound query for Bibliographic title equal to 'moby dick' and Bibliographic author has 'melville'
+snippet jq2
+	// A compound query for Bibliographic title equal to 'moby dick' and Bibliographic author has 'melville'
+	{
+	  "queries": [
+	    {
+	      "target": {
+	        "record": {"type": "bib"},
+	        "field": {"tag": "t"}
+	      },
+	      "expr": {
+	        "op": "equals",
+	        "operands": ["moby dick"]
+	      }
+	    },
+	    "and",
+	    {
+	      "target": {
+	        "record": {"type": "bib"},
+	        "field": {"tag": "a"}
+	      },
+	      "expr": {
+	        "op": "has",
+	        "operands": ["melville"]
+	      }
+	    }
+	  ]
+	}
+# A simple query with a compound expression
+# A simple query for Bibliographic title equal to 'moby dick' and has 'whale'
+snippet jq3
+	// A simple query for Bibliographic title equal to 'moby dick' and has 'whale'
+	{
+	  "target": {
+	    "record": {"type": "bib"},
+	    "field": {"tag": "t"}
+	  },
+	  "expr": [
+	    {
+	      "op": "equals",
+	      "operands": ["moby dick"]
+	    },
+	    "and",
+	    {
+	      "op": "has",
+	      "operands": ["whale"]
+	    }
+	  ]
+	}
+# A soft-linked record type
+# A query for Related resource name has 'test'
+snippet jq4
+	// A query for Related resource name has 'test'
+	{
+	  "target": {
+	    "record": {
+	      "type": "resource",
+	      "relationType": "soft"
+	    },
+	    "field": {"tag": "t"}
+	  },
+	  "expr": {
+	    "op": "has",
+	    "operands": ["test"]
+	  }
+	}

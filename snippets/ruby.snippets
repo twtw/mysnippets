@@ -1,0 +1,178 @@
+# http://datamapper.org/docs/
+snippet dmhead
+	require 'dm-core'
+	require 'dm-migrations'
+	require 'dm-aggregates'
+	require 'dm-timestamps'
+	require 'dm-mysql-adapter'
+	require 'dm-sqlite-adapter'
+snippet mysql
+	DataMapper.setup(:default, 'mysql://${1:user}:${2:password}@localhost/${3:dbname}')
+snippet sqlite
+	BASE = File.dirname(__FILE__) unless defined? BASE
+	DataMapper.setup(:default, "sqlite:///#{BASE}/db/${1:dbfile}")
+snippet memory
+	DataMapper.setup(:default, "sqlite::memory:")
+snippet model
+	class ${1:#}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  property :created_at, DateTime
+	  property :${2}, String
+	  storage_names[:default] = '${3}s'
+	end
+	DataMapper.finalize
+	${0:$1}.auto_upgrade!
+snippet lazy
+	property :notes, Text,  :lazy => false
+snippet bt
+	belongs_to :${1}
+snippet has
+	has n, :${1}, ${2::through =>} ${3:Resource}
+# Self referential many to many relationships
+snippet friendship
+	# Self referential many to many relationships
+	class ${1:Person}
+	  include DataMapper::Resource
+	  property :id,    Serial
+	  property :name , String, :required => true
+	  has n, :friendships, :child_key => [ :source_id ]
+	  has n, :friends, self, :through => :friendships, :via => :target
+	end
+
+	class ${2:Friendship}
+	  include DataMapper::Resource
+	  belongs_to :source, '${6:$1}', :key => true
+	  belongs_to :target, '${7:$1}', :key => true
+	end
+	DataMapper.finalize
+	${0:$1}.auto_upgrade!
+	${0:$2}.auto_upgrade!
+
+# has n, :through (or One-To-Many-Through)
+snippet tagging
+	# has n, :through (or One-To-Many-Through)
+	class ${1:Photo}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  has n, :taggings
+	  has n, :tags, :through => :taggings
+	end
+
+	class ${2:Tag}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  has n, :taggings,
+	  has n, :photos, :through => :taggings
+	end
+
+	class ${3:Tagging}
+	  include DataMapper::Resource
+	  belongs_to :tag,  :key => true
+	  belongs_to :photo, :key => true
+	end
+	DataMapper.finalize
+	${0:$1}.auto_upgrade!
+	${0:$2}.auto_upgrade!
+	${0:$3}.auto_upgrade!
+# has n and belongs_to (or One-To-Many)
+snippet posts
+	class ${1:Post}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  has n, :comments
+	end
+
+	class ${2:Comment}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  property :rating, Integer
+	  belongs_to :post
+
+	  def self.popular
+	    all(:rating.gt => 3)
+	  end
+	end
+	DataMapper.finalize
+	${0:$1}.auto_upgrade!
+	${0:$2}.auto_upgrade!
+# Has, and belongs to, many (Or Many-To-Many)
+snippet article
+	# Has, and belongs to, many (Or Many-To-Many)
+	class ${1:Article}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  has n, :categories, :through => Resource
+	end
+
+	class ${2:Category}
+	  include DataMapper::Resource
+	  property :id, Serial
+	  has n, :articles, :through => Resource
+	end
+	DataMapper.finalize
+	${0:$1}.auto_upgrade!
+	${0:$2}.auto_upgrade!
+snippet profile
+	class ${1:Person}
+	  include DataMapper::Resource
+	  has 1, :profile
+	end
+
+	class ${2:Profile}
+	  include DataMapper::Resource
+	  belongs_to :person
+	end
+	DataMapper.finalize
+	${0:$1}.auto_upgrade!
+	${0:$2}.auto_upgrade!
+	# Assigning a resource to a one-to-one relationship
+	#person  = Person.create
+	#person.profile = Profile.new
+	#person.save
+	#
+	# Assigning a resource to a many-to-one relationship
+	#profile = Profile.new
+	#profile.person = Person.new
+	#profile.save
+
+snippet simpleapp
+	# sinatra's Modular Style
+	# http://blog.carbonfive.com/2013/06/24/sinatra-best-practices-part-one/
+	# app.rb
+	require 'sinatra/base'
+
+	set :root, File.dirname(__FILE__)
+	enable :sessions
+
+	class SimpleApp < Sinatra::Base
+		def require_logged_in
+			redirect '/sessions/new' unless is_authenticated?
+		end
+
+		def is_authenticated?
+			return !!session[:user_id]
+		end
+
+		get '/' do
+			slim :login
+		end
+
+		get '/sessions/new' do
+			slim :login
+		end
+
+		post '/sessions' do
+			session[:user_id] = params['user_id']
+		end
+
+		get '/secrets' do
+			require_logged_in
+			slim :secret
+		end
+	end
+	#######
+	# config.ru
+	require File.dirname(__FILE__) + '/app'
+
+	run SimpleApp

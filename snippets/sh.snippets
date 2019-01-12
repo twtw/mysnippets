@@ -1,0 +1,39 @@
+snippet tmux
+	#!/bin/bash
+	# example from
+	# https://blog.htbaa.com/news/tmux-scripting
+	PWD=/home/SITES
+	# 累積序號，避免 session 名稱重覆。
+	#FILE=/tmp/index.tmux
+	FILE=/tmp/$USER'.tmux.index'
+	if [ -f $FILE ]
+	then
+		CURRENT=\`cat $FILE\`
+		NEW=$(echo \`expr $CURRENT + 1\`)
+		echo $NEW > $FILE
+		echo "$CURRENT add 1 to $NEW"
+	else
+		echo "create $FILE"
+		echo "1" >> $FILE
+	fi
+	SESSION=$USER$NEW
+	echo $SESSION
+	tmux -2 new -d -s $SESSION
+	tmux rename-window '${1:RUN0}'
+
+snippet nw
+	tmux new-window -t $SESSION:${1:1} -n '${2:RUNx}'
+
+snippet np
+	tmux send-key "cd /home/SITES/${1:DIR1}; sh run.sh" C-m
+	tmux split-window -v
+	tmux send-key "cd /home/SITES/${2:DIR2}; sh run.sh" C-m
+	tmux split-window -h
+	tmux send-key "cd /home/SITES/${3:DIR3}; sh run.sh" C-m
+	tmux select-pane -t 0
+	tmux split-window -h
+	tmux send-key "cd /home/SITES/${4:DIR4}; sh run.sh" C-m
+
+snippet np2
+	tmux split-window -v
+

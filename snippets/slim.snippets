@@ -1,0 +1,874 @@
+snippet spectrehtml
+	doctype html
+	html
+		head
+			-# meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"
+			meta charset="utf-8"
+			title ${1:title}
+			meta name="viewport" content="width=device-width, initial-scale=1"
+			link rel="stylesheet" href="/node_modules/spectre.css/dist/spectre.min.css"
+			link rel="stylesheet" href="/node_modules/spectre.css/dist/spectre-exp.min.css"
+			link rel="stylesheet" href="/node_modules/spectre.css/dist/spectre-icons.min.css"
+			link rel="stylesheet" href="/node_modules/dna.js/dist/dna.css"
+		body
+			script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"
+			script type="text/javascript" src="/node_modules/dna.js/dist/dna.min.js"
+			javascript:
+				(function($){
+				})(jQuery);
+snippet mhtml 
+	doctype html
+	html
+		head
+			meta charset="utf-8"
+			title ${1:title}
+			meta name="viewport" content="width=device-width, initial-scale=1"
+			link rel="stylesheet" href="/node_modules/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css"
+			script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"
+			script type="text/javascript" src="/node_modules/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"
+			-#link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+			-#script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"
+			-#script type="text/javascript" src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"
+		body
+			div data-role="page"
+				div data-role="header" ${2:header}
+				div data-role="content" ${3:content}
+				div data-role="footer" ${4:footer}
+snippet mobile 
+	link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css"
+	script src="http://code.jquery.com/jquery-1.4.3.min.js"
+	script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"
+snippet mpage 
+	div data-role="page"
+		div data-role="header" ${1:header}
+		div data-role="content" ${2:content}
+		div data-role="footer" ${3:footer}
+snippet mheader 
+	header data-role="header" ${1:Header}
+snippet mfooter 
+	header data-role="footer" ${2:Footer}
+# list view
+snippet listview 
+	ul data-role="listview" data-theme="${1:a/b/c/d/e/f/g}"
+		li
+			a href="${2:item1.html}" ${3:item1}
+		li
+			a href="${4:item1.html}" ${5:item1}
+		li.ui-li-aside
+			a href="${6:item1.html}" ${7:item1}
+# in set list
+snippet insetlist 
+	ul data-role="listview" data-theme="${1:a/b/c/d/e/f/g}" data-inset="true"
+		li
+			a href="${2:item1.html}" ${3:item1}
+		li
+			a href="${4:item1.html}" ${5:item1}
+		li
+			a href="${6:item1.html}" ${7:item1}
+# counter in the list (e.g. number of comments, number of recommends, etc.)
+snippet listcount 
+	span.ui-li-count ${1:10}
+#############################################################################
+# Form Elements # see http://jquerymobile.com/demos/1.0a4.1/#docs/forms/index.html for more detail
+#############################################################################
+# select
+snippet mselect 
+	div data-role="fieldcontain" data-native-menu="${4:false}"
+		label.select for="$1" ${3:Choose:}
+		select#${1:text} name="$2"
+			option value="$4" ${4:text}
+			option value="$5" ${5:text}
+			option value="$6" ${6:text}
+# text input
+snippet mtext 
+	div data-role="fieldcontain"
+		label for="$1" ${5:Text Input:}
+		input#${1:text} type="${2:text|password|email|url|tel|number|date|datetime|datetime-local|month|week|time|color}" name="${3:name}" value="${4}"
+# checkbox
+snippet mcheckbox 
+	div data-role="fieldcontain"
+		fieldset data-role="controlgroup"
+			legend Agree to the terms:
+			input#checkbox-1.custom type="checkbox" name="checkbox-1"
+			label for="checkbox-1" I agree
+# radio
+snippet mradio 
+	div data-role="fieldcontain"
+		fieldset data-role="controlgroup"
+			legend ${1:Choose a pet:}
+			input#$2 type="radio" name="${2:radio-choice-1}" value="$2" checked="checked"
+			label for="$2" Cat
+			input#${3:radio-choice-2} type="radio" name="$2" value="$3"
+			label for="radio-choice-2" Dog
+			input#${4:radio-choice-3} type="radio" name="$2" value="$4"
+			label for="$4" Hamster
+			input#${5:radio-choice-4} type="radio" name="$2" value="$5"
+			label for="$5" Lizard
+snippet msearch 
+	div data-role="fieldcontain"
+		label for="search" Search Input:
+		input#search type="search" name="password" value=""
+# slider
+snippet mslider 
+	div data-role="fieldcontain"
+		label for="slider" Input slider:
+		input#slider type="range" name="slider" value="0" min="0" max="100"
+# flip control
+snippet mflip 
+	div data-role="fieldcontain"
+		label for="slider" Select slider:
+		select#slider name="slider" data-role="slider"
+			option value="off" Off
+			option value="on" On
+# form with ajax false
+snippet mform
+	form method="${1:POST}" action="${2:/path/action}" ${3:data-ajax="false"}
+		button type="submit" data-theme="a" name="submit" value="${4}" ${5}
+#############################################################################
+# Layout
+snippet 4column 
+	.ui-grid-c
+		.ui-block-a Block A
+		.ui-block-b Block B
+		.ui-block-c Block C
+		.ui-block-c Block D
+snippet collapsible
+	div data-role="collapsible" ${1:data-collapsed="true"}
+		h3 I'm a header
+		p I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.
+snippet accordion 
+	div data-role="collapsible-set"
+		div data-role="collapsible"
+			h3 I'm a header in a set of collapsibles
+			p I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.
+		div data-role="collapsible" data-collapsed="true"
+			h3 I'm a header in a set of collapsibles
+			p I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.
+		div data-role="collapsible" data-collapsed="true"
+			h3 I'm a header in a set of collapsibles
+			p I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.
+#############################################################################
+# buttons
+#############################################################################
+# link button
+snippet lbtn 
+	a href="index.html" data-role="button" Link button
+# inline buttons
+snippet ibtns 
+	p inline buttons:
+	div data-inline="true"
+		a href="index.html" data-role="button" Cancel
+		a href="index.html" data-role="button" data-theme="b" Save
+# group buttons
+snippet gbtns 
+	div data-role="controlgroup"
+		a href="index.html" data-role="button" Yes
+		a href="index.html" data-role="button" No
+		a href="index.html" data-role="button" Maybe
+# Horizontal grouped buttons:
+snippet hrbtns 
+	div data-role="controlgroup" data-type="horizontal"
+		a href="index.html" data-role="button" Yes
+		a href="index.html" data-role="button" No
+		a href="index.html" data-role="button" Maybe
+# Horizontal grouped buttons with icons:
+snippet iconbtns 
+	p Horizontal grouped buttons with icons:
+	div data-role="controlgroup" data-type="horizontal"
+		a href="index.html" data-role="button" data-icon="arrow-u" Up
+		a href="index.html" data-role="button" data-icon="arrow-d" Down
+		a href="index.html" data-role="button" data-icon="delete" Delete
+# Horizontal grouped buttons, icon only:
+snippet icons 
+	div data-role="controlgroup" data-type="horizontal"
+		a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" Up
+		a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" Down
+		a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" Delete
+############################################################################
+# Toolbars
+############################################################################
+snippet footericons 
+	.ui-bar data-role="footer"
+		a href="index.html" data-role="button" data-icon="delete" Remove
+		a href="index.html" data-role="button" data-icon="plus" Add
+		a href="index.html" data-role="button" data-icon="arrow-u" Up
+		a href="index.html" data-role="button" data-icon="arrow-d" Down
+snippet headericons 
+	div data-role="header" data-position="inline"
+		a href="index.html" data-icon="delete" Cancel
+		h1 Edit Contact
+		a href="index.html" data-icon="check" data-theme="b" Save
+# navigation bar
+snippet navbar 
+	div data-role="navbar"
+		ul
+			li
+				a.ui-btn-active href="a.html" One
+			li
+				a href="b.html" Two
+# navigation footer (set data-id to make Persistent footers)
+snippet navfooter 
+	div data-role="footer" data-id="foo1" data-position="fixed"
+		div data-role="navbar"
+			ul
+				li
+					a.ui-btn-active.ui-state-persist href="footer-persist-a.html" Friends
+				li
+					a href="footer-persist-b.html" Albums
+				li
+					a href="footer-persist-c.html" Emails
+# navigation icons in bar
+snippet navicon 
+	div data-role="navbar"
+		ul
+			li
+				a href="#" data-icon="grid" data-iconpos="top" Summary
+			li
+				a.ui-btn-active href="#" data-icon="star" data-iconpos="top" Favs
+			li
+				a href="#" data-icon="gear" data-iconpos="top" Setup
+############################################################################
+# Button icons
+############################################################################
+snippet icon_arrowl 
+	a href="index.html" data-role="button" data-icon="arrow-l" My button
+snippet icon_arrowr 
+	a href="index.html" data-role="button" data-icon="arrow-r" My button
+snippet icon_arrowu 
+	a href="index.html" data-role="button" data-icon="arrow-u" My button
+snippet icon_arrowd 
+	a href="index.html" data-role="button" data-icon="arrow-d" My button
+snippet icon_delete 
+	a href="index.html" data-role="button" data-icon="delete" My button
+snippet icon_plus 
+	a href="index.html" data-role="button" data-icon="plus" My button
+snippet icon_minus 
+	a href="index.html" data-role="button" data-icon="minus" My button
+snippet icon_check 
+	a href="index.html" data-role="button" data-icon="check" My button
+snippet icon_gear 
+	a href="index.html" data-role="button" data-icon="gear" My button
+snippet icon_refresh 
+	a href="index.html" data-role="button" data-icon="refresh" My button
+snippet icon_forward 
+	a href="index.html" data-role="button" data-icon="forward" My button
+snippet icon_back 
+	a href="index.html" data-role="button" data-icon="back" My button
+snippet icon_grid 
+	a href="index.html" data-role="button" data-icon="grid" My button
+snippet icon_star 
+	a href="index.html" data-role="button" data-icon="star" My button
+snippet icon_alert 
+	a href="index.html" data-role="button" data-icon="alert" My button
+snippet icon_info 
+	a href="index.html" data-role="button" data-icon="info" My button
+snippet icon_home 
+	a href="index.html" data-role="button" data-icon="home" My button
+snippet icon_search 
+	a href="index.html" data-role="button" data-icon="search" My button
+snippet modal_html
+	-# https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/
+	a href='#openModal' Open Modal
+	#openModal.modalDialog
+	  div
+		  a.close href='#close' title='Close' X
+		  h2 Modal Box
+		  p modal box line 1
+		  p modal box line 2
+snippet modal_css
+	.modalDialog {
+		position: fixed;
+		font-family: Arial, Helvetica, sans-serif;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(0,0,0,0.8);
+		z-index: 99999;
+		opacity:0;
+		-webkit-transition: opacity 400ms ease-in;
+		-moz-transition: opacity 400ms ease-in;
+		transition: opacity 400ms ease-in;
+		pointer-events: none;
+	}
+	.modalDialog:target {
+		opacity:1;
+		pointer-events: auto;
+	}
+	.modalDialog > div {
+		width: 400px;
+		position: relative;
+		margin: 10% auto;
+		padding: 5px 20px 13px 20px;
+		border-radius: 10px;
+		background: #fff;
+		background: -moz-linear-gradient(#fff, #999);
+		background: -webkit-linear-gradient(#fff, #999);
+		background: -o-linear-gradient(#fff, #999);
+	}
+	.close {
+		background: #606061;
+		color: #FFFFFF;
+		line-height: 25px;
+		position: absolute;
+		right: -12px;
+		text-align: center;
+		top: -10px;
+		width: 24px;
+		text-decoration: none;
+		font-weight: bold;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+		-moz-box-shadow: 1px 1px 3px #000;
+		-webkit-box-shadow: 1px 1px 3px #000;
+		box-shadow: 1px 1px 3px #000;
+	}
+	.close:hover { background: #00d9ff; }
+
+# https://github.com/chrisgillis/vim-bootstrap3-snippets
+snippet doctype (bootstrap3)
+	doctype html
+	${1}
+
+snippet viewport (bootstrap3)
+	meta name="viewport" content="width=device-width, initial-scale=1"
+
+snippet viewport-nozoom (bootstrap3)
+	meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+
+snippet container (bootstrap3)
+	div.container
+	  ${1}
+
+snippet container-fluid (bootstrap3)
+	div.container-fluid
+	  ${1}
+
+snippet row (bootstrap3)
+	div.row
+	  ${1}
+
+snippet col (bootstrap3)
+	div.col-xs-${1:size} col-sm-$1 col-md-$1 col-lg-$1
+	  ${2}
+
+snippet p-lead (bootstrap3)
+	p.lead${1:...}
+
+snippet abbr (bootstrap3)
+	abbr title="${1:attribute}"$1
+
+snippet abbr-initialism (bootstrap3)
+	abbr.initialism title="${1:attribute}" $1
+
+snippet address (bootstrap3)
+	address
+	  strong ${1: Twitter, Inc.}
+	  br
+	  ${2:795 Folsom Ave, Suite 600}
+	  br
+	  ${3:San Francisco, CA 94107}
+	  br
+	  abbr title="Phone"P: ${4:(123) 456-7890}
+
+	address
+	  strong ${5:Full Name}
+	  br
+	  a href="mailto:${6:#}" ${7:first.last@example.com}
+
+snippet blockquote (bootstrap3)
+	blockquote
+	  p ${1:...}
+
+snippet blockquote-cite (bootstrap3)
+	blockquote
+	  p ${1:...}
+	  footer ${2:Someone famous in}
+	  cite title="${3:Source Title}" ${4:Source Title}
+
+snippet blockquote-cite-r  (bootstrap3)
+	blockquote.blockquote-reverse
+	  p ${1:...}
+	  footer ${2:Someone famous in} 
+	  cite title="${3:Source Title}" $3
+
+snippet list (bootstrap3)
+	ul
+	  li ${1}
+
+snippet list-unstyled (bootstrap3)
+	ul.list-unstyled
+	  li  ${1}
+
+snippet list-inline (bootstrap3)
+	ul.list-inline
+	  li ${1}
+
+snippet dl (bootstrap3)
+	dl
+	  dt ${1}
+	  dd ${2}
+
+snippet dl-horizontal (bootstrap3)
+	dl
+	  dt ${1}
+	  dd ${2}
+
+snippet pre-scrollable (bootstrap3)
+	pre.scrollable ${1}
+
+snippet table (bootstrap3)
+	table.table.${1:table-striped}.${2:table-bordered}.${3:table-hover}.${4:table-condensed}.${5:table-response}
+	  ${6}
+
+snippet contextuals (bootstrap3)
+	.active
+	.success
+	.info
+	.warning
+	.danger
+	.text-muted
+	.text-primary
+	.text-success
+	.text-info
+	.text-warning
+	.text-danger
+	.bg-primary
+	.bg-success
+	.bg-info
+	.bg-warning
+	.bg-danger
+
+snippet form  (bootstrap3)
+	form role="form"
+	  div.form-group
+	    label for="${1:id}"${2:Label Title}
+	  input.form-control type="${3}" id="$1" placeholder="$2"
+	  button.btn.btn-default type="submit" ${4:Submit}
+
+snippet form-inline (bootstrap3)
+	form.form-inline role="form"
+	  div.form-group
+	  	label.sr-only for="${1:id}"${2:Label Title}
+	  	input.form-control type="${3}" id="$1" placeholder="$2"
+	  button.btn.btn-default type="submit" ${4:Submit}
+
+snippet form-horizontal (bootstrap3)
+	form.form-horizontal role="form"
+	  div.form-group
+	  	label.col-sm-${2:2}.control-label for="${1:id}" ${3:Label Title}
+	  	div.col-sm-${4:10}
+	  	  input.form-control type="${5}" id="$1" placeholder="$3"
+	  div.form-group
+	  	div.col-sm-offset-$2.col-sm-$4
+	  	  button.btn.btn-default type="submit" Submit
+
+snippet form-group (bootstrap3)
+	div.form-group
+	  ${1}
+
+snippet input (bootstrap3)
+	input.form-control type="text" name="${1}" value="${2}" placeholder="$1"
+
+snippet textarea (bootstrap3)
+	textarea.form-control name="${1}" rows="${2}" cols="${3}" ${4}
+
+snippet checkbox (bootstrap3)
+	div.checkbox
+	  label
+	  input type="checkbox" value="${1}"
+	    ${2:Option One}
+
+snippet checkbox-inline (bootstrap3)
+	label.checkbox-inline
+	  input type="checkbox" value="${1}" ${2:Option One}
+
+snippet radio (bootstrap3)
+	div.radio
+	  label
+	  input type="radio" name="${1:name}" value="${2}" ${3:checked}
+	  ${4:Option One}
+
+snippet radio-inline (bootstrap3)
+	label.radio-inline
+	  input type="radio" value="${1}" ${2:checked}
+
+snippet select (bootstrap3)
+	select.form-control name="${1}"
+	  option ${2}
+
+snippet select-multiple (bootstrap3)
+	select.form-control multiple name="${1}"
+	  option ${2}
+
+snippet validation-states (bootstrap3)
+	.has-success
+	.has-warning
+	.has-error
+
+snippet icon (bootstrap3)
+	span.glyphicon.glyphicon-{$1}
+
+snippet help (bootstrap3)
+	span.help-block ${1:A block of help text}
+
+snippet btn (bootstrap3)
+	button.btn.btn-${1:btn-types} type="button" ${1:Default}
+
+snippet btn-block (bootstrap3)
+	button.btn.btn-block.btn-${1:btn-types} type="button" ${1:Default}
+
+snippet btn-types (bootstrap3)
+	btn-default
+	btn-primary
+	btn-success
+	btn-info
+	btn-warning
+	btn-danger
+	btn-link
+	btn-lg
+	btn-sm
+	btn-xs
+	btn-block
+
+snippet abtn (bootstrap3)
+	a.btn.btn-${2:btn-types} href="{1:#}" ${1:Default}
+
+snippet img (bootstrap3)
+	img.${2:img-responsive,img-rounded,img-circle,img-thumbnail} src="${1:#}" alt="${3:Responsive image}"
+
+snippet btn-close (bootstrap3)
+	button.close type="button" aria-hidden="true" &times;
+
+snippet caret (bootstrap3)
+	span.caret
+
+snippet floats (bootstrap3)
+	.pull-left
+	.pull-right
+
+snippet center-block (bootstrap3)
+	div.center-block${1}
+
+snippet clearfix (bootstrap3)
+	div.clearfix
+
+snippet div-show (bootstrap3)
+	div.show ${1}
+
+snippet div-hidden (bootstrap3)
+	div.hidden ${1}
+
+snippet dropdown (bootstrap3)
+	div.dropdown
+	button.btn.dropdown-toggle.sr-only type="button" id="dropdownMenu1" data-toggle="dropdown"
+	  Dropdown
+	  span.caret
+	ul.dropdown-menu role="menu" aria-labelledby="dropdownMenu1"
+	  li role="presentation"
+	    a role="menuitem" tabindex="-1" href="#" Action
+	  li role="presentation"
+	    a role="menuitem" tabindex="-1" href="#" Another action
+	  li role="presentation"
+	    a role="menuitem" tabindex="-1" href="#" Something else here
+	  li.divider role="presentation"
+	  li role="presentation"
+	  a role="menuitem" tabindex="-1" href="#" Separated link
+
+snippet dropdown-headers (bootstrap3)
+	ul.dropdown-menu role="menu" aria-labelledby="dropdownMenu2"
+	  li role="presentation" class="dropdown-header" Dropdown header
+	  li.divider role="presentation"
+	  li.dropdown-header role="presentation" header
+
+snippet btn-group (bootstrap3)
+	div.btn-group
+	  button.btn.btn-default type="button" Left
+	  button.btn.btn-default type="button" Middle
+	  button.btn.btn-default type="button" Right
+
+snippet btn-toolbar (bootstrap3)
+	div.btn-toolbar role="toolbar"
+	  div.btn-group ...
+	  div.btn-group ...
+	  div.btn-group ...
+
+snippet btn-group-vertical (bootstrap3)
+	div.btn-group-vertical
+	  ...
+
+snippet btn-dropdown (bootstrap3)
+	div.btn-group
+	  button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown"
+		Action
+		span.caret
+	  ul.dropdown-menu role="menu"
+		li
+		  a href="#" Action
+		li
+		  a href="#" Another action
+		li
+		  a href="#" Something else here
+		li.divider
+		li
+		  a href="#" Separated link
+
+snippet btn-split-dropdown (bootstrap3)
+	div.btn-group
+	  button.btn.btn-danger type="button" Action
+	  button.btn.btn-danger.dropdown-toggle type="button" data-toggle="dropdown"
+		span.caret
+		span.sr-onlyToggle Dropdown
+	  ul.dropdown-menu role="menu"
+		li
+		  a href="#" Action
+		li
+		  a href="#" Another action
+		li
+		  a href="#" Something else here
+		li.divider
+		li
+		  a href="#" Separated link
+
+snippet btn-dropup (bootstrap3)
+	div.btn-group.dropup
+	  button.btn.btn-default type="button" Dropup
+	  button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown"
+		span.caret
+		span.sr-only Toggle Dropdown
+	  ul.dropdown-menu
+		//<!-- Dropdown menu links -->
+
+snippet input-group (bootstrap3)
+	div.input-group
+	  span.input-group-addon @
+	  input.form-control type="text" placeholder="Username"
+
+snippet input-group-button (bootstrap3)
+	div.row
+	  div.col-lg-6
+		div.input-group
+		  div.input-group-btn
+			button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown" Action
+			  span.caret
+			ul.dropdown-menu
+			  li
+			    a href="#" Action
+			  li
+			    a href="#" Action
+			  li
+			    a href="#" Action
+			  li.divider
+			  li
+			    a href="#" Separated link
+		  input.form-control type="text"
+	  div.col-lg-6
+		div.input-group
+		  input.form-control type="text"
+		  div.input-group-btn
+			button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown"
+			  Action
+			  span.caret
+			ul.dropdown-menu pull-right
+			  li
+			    a href="#" Action
+			  li
+			    a href="#" Another Action
+			  li
+			    a href="#" Something Else
+			  li.divider
+			  li
+			    a href="#"
+
+snippet nav-tabs (bootstrap3)
+	ul class="nav nav-tabs"
+	  li.active
+	    a href="#" Home
+	  li
+	    a href="#" Profile
+	  li
+	    a href="#" Messages
+
+snippet nav-pills (bootstrap3)
+	ul.nav.nav-pills
+	  li.active
+	    a href="#" Home
+	  li
+	    a href="#" Profile
+	  li
+	    a href="#" Messages
+
+snippet nav-pills-stacked (bootstrap3)
+	ul.nav.nav-pills.nav-stacked
+	  li.active
+	    a href="#" Home
+	  li
+	    a href="#" Profile
+	  li
+	    a href="#" Messages
+
+snippet nav-tab-dropdown (bootstrap3)
+	ul.nav.nav-tabs
+	  li.dropdown
+		a.dropdown-toggle data-toggle="dropdown" href="#"
+		  Dropdown 
+		  span.caret
+		ul.dropdown-menu
+		  li
+		    a href="#" Action
+
+snippet navbar (bootstrap3)
+	nav.navbar.navbar-default role="navigation"
+	  div.container-fluid
+		//<!-- Brand and toggle get grouped for better mobile display -->
+		div.navbar-header
+		  button.navbar-toggle type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+			span.sr-only Toggle navigation
+			span.icon-bar
+			span.icon-bar
+			span.icon-bar
+		  a.navbar-brand href="#" Brand
+
+		//<!-- Collect the nav links, forms, and other content for toggling -->
+		div.collapse.navbar-collapse id="bs-example-navbar-collapse-1"
+		  ul.nav.navbar-nav
+			li.active
+			  a href="#" Link
+			li
+			  a href="#"Link
+			li.dropdown
+			  a.dropdown-toggle href="#" data-toggle="dropdown"Dropdown
+			    b.caret
+			  ul.dropdown-menu
+				li
+				  a href="#" Action
+				li
+				  a href="#" Another Action
+				li
+				  a href="#" Something else here
+				li.divider
+				li
+				  a href="#" Separated link
+				li.divider
+				li
+				  a href="#" One more separated link
+		  form.navbar-form.navbar-left role="search"
+			div.form-group
+			  input.form-control type="text" placeholder="Search"
+			button.btn.btn-default type="submit" Submit
+		  ul.nav.navbar-nav.navbar-right
+			li
+			  a href="#" Link
+			li.dropdown
+			  a.dropdown-toggle href="#" data-toggle="dropdown" Dropdown
+			    b class="caret"
+			  ul.dropdown-menu
+				li
+				  a href="#" Action
+				li
+				  a href="#" Another Action
+				li
+				  a href="#" Something else here
+				li.divider
+				li
+				  a href="#" Separated link
+
+snippet navbar-form (bootstrap3)
+	form.navbar-form.navbar-left role="search"
+	  div.form-group
+		input.form-control type="text" placeholder="Search"
+	  button.btn.ben-default type="submit" Submit
+
+snippet breadcrumb (bootstrap3)
+	ol.breadcrumb
+	  li
+	    a href="#" Home
+	  li
+	    a href="#" Lirbary
+	  li
+	    a.active href="#" Data
+
+snippet pagination (bootstrap3)
+	ul.pagination
+	  li
+	    a href="#" &laquo;
+	  li
+	    a href="#" 1
+	  li
+	    a href="#" 2
+	  li
+	    a href="#" 3
+	  li
+	    a href="#" 4
+	  li
+	    a href="#" 1
+	  li
+	    a href="#" &raquo;
+
+snippet pager (bootstrap3)
+	ul.pager
+	  li
+	    a href="${1:#}" Previous
+	  li
+	    a href="${2:#}" Next
+
+snippet label-badge (bootstrap3)
+	span.label.label-${1:default,primary,success,info,warning,danger}${2:$1}
+
+snippet badge (bootstrap3)
+	span.badge${1}
+
+snippet jumbotron (bootstrap3)
+	div.jumbotron
+	  h1 ${1:Hello, World}
+	  p ${2:...}
+	  p 
+	    a.btn.btn-primary.btn-lg role="button"
+
+snippet page-header (bootstrap3)
+	div.page-header
+	  h1 ${1:Example page header}
+	    small ${2:Subtext for header}
+
+snippet thumbnails (bootstrap3)
+	div.row
+	  div.col-xs-${1:6}.col-md-${2:3}
+		a.thumbnail href="${3:#}"
+		  img data-src="holder.js/100%x180" alt="${4:...}"
+		
+snippet alert (bootstrap3)
+	div.alert.alert-${1:success,info,warning,danger,dismissable}${2:alert text}
+
+snippet progress-bar (bootstrap3)
+	div.progress
+	  div.progress-bar role="progressbar" aria-valuenow="${1}" aria-valuemin="${2}" aria-valuemax="${3:100}"
+		${4:60%}	
+
+snippet media-list (bootstrap3)
+	ul.media-list
+	  li.media
+		a.pull-left href="#"
+		  img.media-object src="..." alt="..."
+		div.media-body
+		  h4.media-heading Media heading
+		  ...
+
+snippet list-group (bootstrap3)
+	ul.list-group
+	  li.list-group-item${1:Item 1}
+
+snippet linked-list-group (bootstrap3)
+	div.list-group
+	  a.list-group-item href="${1:#}" ${2:Link 1}
+
+snippet panel (bootstrap3)
+	div.panel.panel-${1:default,success,info,warn,danger}
+	  div.panel-heading
+	  	div.panel-title ${2:Panel title}
+	  div.panel-body
+	  	${3}
+
+snippet well (bootstrap3)
+	div.well
+	  ${1:Look, I'm in a well}

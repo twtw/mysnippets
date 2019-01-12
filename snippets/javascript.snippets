@@ -1,0 +1,44 @@
+# https://github.com/grvcoelho/vim-javascript-snippets
+# DOM
+# addEventListener
+snippet ae
+	${1:document}.addEventListener('${2:event}', ${3:function})
+# appendChild
+snippet ac
+	${1:document}.appendChild(${2:elem})
+# removeChild
+snippet rc
+	${1:document}.removeChild(${2:elem})
+# createElement
+# https://developer.mozilla.org/zh-TW/docs/Web/API/Document/createElement
+snippet cel
+	${1:document}.createElement(${2:elem},{${3:id}: "${4:value}"});
+snippet vcel
+	var ${1:ele_name} = ${2:document}.createElement(${3:elem},{${3:id}: "${4:value}"});
+snippet vn
+	var ${1:ele_name} = 
+snippet sa
+	${1:ele_name}.setAttribute("${2:id}", "${3:value}");
+# createTextNode
+snippet ctn
+	${1:document}.createTextNode(${2:elem}); 
+snippet vctn
+	var ${1:ele_name} = ${2:document}.createTextNode(${3:elem});
+# https://ithelp.ithome.com.tw/articles/10192204
+snippet xhr.onload
+	var xhr = new XMLHttpRequest();
+	xhr.open("${1:GET}","${2:url}",${3:false});
+	xhr.onlod() = function(){
+		${4:code}
+	};
+	xhr.send(${5});
+# https://www.w3schools.com/js/js_ajax_http_response.asp
+snippet xhr
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200){
+			${4:code}
+		}
+	};
+	xhr.open("${1:GET}","${2:url}",${3:true});
+	xhr.send(${5});
